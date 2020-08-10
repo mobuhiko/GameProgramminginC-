@@ -1,0 +1,23 @@
+#ifndef GAME_H_INCLUDED
+#define GAME_H_INCLUDED
+
+#include "SDL/SDL.h"
+
+class Game
+{
+public:
+    Game();
+    bool Initialize(); // initialize the game
+    void RunLoop(); // runs the game loop until the game is over
+    void Shutdown(); // shutdown the game
+private:
+    // helper functions for the game loop
+    void ProcessInput();
+    void UpdatefGame();
+    void GenerateOutput();
+    // window created by SDL
+    SDL_Window* mwindow;
+    // game should continue to run
+    bool mIsRunning;
+};
+#endif // GAME_H_INCLUDED
