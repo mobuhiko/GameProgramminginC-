@@ -20,4 +20,5 @@ private:
     // game should continue to run
     bool mIsRunning;
 };
+
 #endif // GAME_H_INCLUDED
