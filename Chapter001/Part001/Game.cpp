@@ -27,7 +27,7 @@ void Game::Initialze()
 
     if(!mWindow)
     {
-        SDL_Log("Failed to create window: %s", SDL_GetErrot);
+        SDL_Log("Failed to create window: %s", SDL_GetError);
         return false;
     }
 
