@@ -50,7 +50,22 @@ void Game::RunLoop()
     while(mIsRunning)
     {
         ProcessInput();
-        UpdatefGame();
+        UpdateGame();
         GenerateOutput();
     }
+}
+
+void Game::ProcessInput()
+{
+    ;
+}
+
+void Game::UpdateGame()
+{
+    ;
+}
+
+void Game::GenerateOutput()
+{
+    ;
 }
