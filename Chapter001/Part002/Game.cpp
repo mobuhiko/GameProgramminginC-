@@ -1,32 +1,36 @@
-#include <game.h>
+#include "Game.h"
 
-void Game::Initialze()
+Game::Game() :mWindow(nullptr), mIsRunning(true), mRenderer(nullptr)
+{
+    ;
+}
+
+bool Game::Initialize()
 {
     int sdlResult = SDL_Init(SDL_INIT_VIDEO);
-    if(sdlResult != 0)
+    if (sdlResult != 0)
     {
         SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
         return false;
     }
 
     mWindow =
-    SDL_CreateWindow
-    (
-        // window title
-        "Game Programming in C++ (Chapter 1)",
-        // top left x-coordinate of window
-        100,
-        // top left y-coordinate of window
-        100,
-        // width of window
-        1024,
-        // height of window
-        768,
-        // flags (0 for no flags set)
-        0
-    );
+        SDL_CreateWindow(
+            // window title
+            "Game Programming in C++ (Chapter 1)",
+            // top left x-coordinate of window
+            100,
+            // top left y-coordinate of window
+            100,
+            // width of window
+            1024,
+            // height of window
+            768,
+            // flags (0 for no flags set)
+            0
+        );
 
-    if(!mWindow)
+    if (!mWindow)
     {
         SDL_Log("Failed to create window: %s", SDL_GetError());
         return false;
@@ -34,15 +38,14 @@ void Game::Initialze()
 
     return true;
 
-    mRender =
-    SDL_CreateRenderer
-    (
-        mWindow, // window to create renderer for
-        -1, // usually -1
-        SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
-    );
+    mRenderer =
+        SDL_CreateRenderer(
+            mWindow, // window to create renderer for
+            -1, // usually -1
+            SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
+        );
 
-    if(!mRenderer)
+    if (!mRenderer)
     {
         SDL_Log("Failed to create render: %s", SDL_GetError());
         return false;
@@ -59,7 +62,7 @@ void Game::Shutdown()
 
 void Game::RunLoop()
 {
-    while(mIsRunning)
+    while (mIsRunning)
     {
         ProcessInput();
         UpdateGame();
@@ -71,9 +74,9 @@ void Game::ProcessInput()
 {
     SDL_Event event;
     // while there are still events in the queue
-    while(SDL_PollEvent(&event))
+    while (SDL_PollEvent(&event))
     {
-        switch(event.type)
+        switch (event.type)
         {
         case SDL_QUIT:
             mIsRunning = false;
@@ -91,10 +94,9 @@ void Game::ProcessInput()
     }
 }
 
-Game::GenerateOutput()
+void Game::GenerateOutput()
 {
-    SDL_SetRenderDrawColor
-    (
+    SDL_SetRenderDrawColor(
         mRenderer,
         0, // R
         0, // G
@@ -107,4 +109,9 @@ Game::GenerateOutput()
     // draw entire game scene
 
     SDL_RenderPresent(mRenderer);
+}
+
+void Game::UpdateGame()
+{
+    ;
 }
