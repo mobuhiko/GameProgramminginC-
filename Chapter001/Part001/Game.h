@@ -13,7 +13,7 @@ public:
 private:
     // helper functions for the game loop
     void ProcessInput();
-    void UpdatefGame();
+    void UpdateGame();
     void GenerateOutput();
     // window created by SDL
     SDL_Window* mwindow;
