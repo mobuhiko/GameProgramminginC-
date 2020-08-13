@@ -1,6 +1,7 @@
 #ifndef GAME_H_INCLUDED
 #define GAME_H_INCLUDED
-#include "SDL/SDL.h"
+#include <SDL.h>
+
 class Game
 {
 public:
