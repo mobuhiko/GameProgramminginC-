@@ -1,5 +1,10 @@
 #include <Game.h>
 
+Game::Game() :mWindow(nullptr), mIsRunning(true)
+{
+    ;
+}
+
 void Game::Initialze()
 {
     int sdlResult = SDL_Init(SDL_INIT_VIDEO);
