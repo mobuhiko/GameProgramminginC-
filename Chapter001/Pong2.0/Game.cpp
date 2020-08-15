@@ -232,26 +232,16 @@ void Game::GenerateOutput()
     SDL_Rect bottom_wall
     {
         0, // x
-        1024, // y
+        768-thickness, // y
         1024, // width
         thickness // height
     };
     SDL_RenderFillRect(mRenderer, &bottom_wall); // fill the rectangle with the color
 
-    // draw the left wall
-    SDL_Rect left_wall
-    {
-        0, // x
-        0, // y
-        thickness, // width
-        1024 // height
-    };
-    SDL_RenderFillRect(mRenderer, &left_wall); // fill the rectangle with the color
-
     // draw the right wall
     SDL_Rect right_wall
     {
-        768, // x
+        1024-thickness, // x
         0, // y
         thickness, // width
         1024 // height
