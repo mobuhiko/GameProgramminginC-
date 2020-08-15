@@ -175,15 +175,15 @@ void Game::UpdateGame()
     /* ball & wall */
     // (1) if collides with the wall
     // (2) avoid keep stucking with the top wall
-    if (mBallPos.y <= thickness && mBallvel.y < 0.0f)
-        mBallvel.y *= -1;
+    if (mBallPos.y <= thickness && mBallVel.y < 0.0f)
+        mBallVel.y *= -1;
     // the ball collide with the bottom wall?
-	else if (mBallPos.y >= (768 - thickness) &&
-		mBallVel.y > 0.0f)
-	{
-		mBallVel.y *= -1;
-	}
-    
+    else if (mBallPos.y >= (768 - thickness) && mBallVel.y > 0.0f)
+        mBallVel.y *= -1;
+    // Did the ball collide with the right wall?
+    else if (mBallPos.x >= (1024.0f - thickness) && mBallVel.x > 0.0f)
+        mBallVel.x *= -1.0f;
+
     /* ball & paddle */
     float diff = mPaddlePos.y - mBallPos.y;
     if (diff < 0)
@@ -203,10 +203,10 @@ void Game::UpdateGame()
         mBallVel.x *= -1.0f;
     }
     // Did the ball go off the screen? (if so, end game)
-	else if (mBallPos.x <= 0.0f)
-	{
-		mIsRunning = false;
-	}
+    else if (mBallPos.x <= 0.0f)
+    {
+        mIsRunning = false;
+    }
 }
 
 void Game::GenerateOutput()
@@ -243,7 +243,7 @@ void Game::GenerateOutput()
     SDL_Rect bottom_wall
     {
         0, // x
-        768-thickness, // y
+        768 - thickness, // y
         1024, // width
         thickness // height
     };
@@ -252,7 +252,7 @@ void Game::GenerateOutput()
     // draw the right wall
     SDL_Rect right_wall
     {
-        1024-thickness, // x
+        1024 - thickness, // x
         0, // y
         thickness, // width
         1024 // height
