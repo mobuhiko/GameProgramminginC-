@@ -186,7 +186,7 @@ void Game::UpdateGame()
 
     /* ball & paddle */
     float diff = mPaddlePos.y - mBallPos.y;
-    if (diff < 0)
+    if (diff < 0.0f)
         diff = -diff;
     else
         diff = diff;
@@ -275,7 +275,7 @@ void Game::GenerateOutput()
     SDL_Rect paddle
     {
         static_cast<int>(mPaddlePos.x),
-        static_cast<int>(mPaddlePos.y),
+        static_cast<int>(mPaddlePos.y - paddleH / 2),
         thickness,
         static_cast<int>(paddleH)
     };
