@@ -63,5 +63,4 @@ private:
     std::vector<Ball> mBall;
 };
 
-
 #endif // GAME_H_INCLUDED
