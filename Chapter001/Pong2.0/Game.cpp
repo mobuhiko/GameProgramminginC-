@@ -1,7 +1,7 @@
 #include "Game.h"
 
 const int thickness = 15;
-const float paddleH = 100.f;
+const float paddleH = 100.0f;
 
 Game::Game() :
     mWindow(nullptr),
@@ -64,8 +64,8 @@ bool Game::Initialize()
     /* ball */
     mBallPos.x = 1024.0f / 2.0f;
     mBallPos.y = 768.0f / 2.0f;
-    mBallvel.x = -200.0f;
-    mBallvel.y = 235.0f;
+    mBallVel.x = -200.0f;
+    mBallVel.y = 235.0f;
 
     /* paddle */
     mPaddlePos.x = 10.0f;
@@ -168,16 +168,22 @@ void Game::UpdateGame()
     }
 
     /* ball */
-    mBallPos.x += mBallvel.x * deltaTime;
-    mBallPos.y += mBallvel.y * deltaTime;
+    mBallPos.x += mBallVel.x * deltaTime;
+    mBallPos.y += mBallVel.y * deltaTime;
 
     /* collision */
     /* ball & wall */
     // (1) if collides with the wall
-    // (2) avoid keep stucking with the wall
+    // (2) avoid keep stucking with the top wall
     if (mBallPos.y <= thickness && mBallvel.y < 0.0f)
         mBallvel.y *= -1;
-
+    // the ball collide with the bottom wall?
+	else if (mBallPos.y >= (768 - thickness) &&
+		mBallVel.y > 0.0f)
+	{
+		mBallVel.y *= -1;
+	}
+    
     /* ball & paddle */
     float diff = mPaddlePos.y - mBallPos.y;
     if (diff < 0)
@@ -191,11 +197,16 @@ void Game::UpdateGame()
         // ball is at the correct x-position
         mBallPos.x <= 25.0f && mBallPos.x >= 20.0f &&
         // the ball is moving to the left
-        mBallvel.x < 0.0f
+        mBallVel.x < 0.0f
         )
     {
-        mBallvel.x *= -1.0f;
+        mBallVel.x *= -1.0f;
     }
+    // Did the ball go off the screen? (if so, end game)
+	else if (mBallPos.x <= 0.0f)
+	{
+		mIsRunning = false;
+	}
 }
 
 void Game::GenerateOutput()
