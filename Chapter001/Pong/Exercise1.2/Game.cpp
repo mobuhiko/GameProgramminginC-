@@ -239,7 +239,8 @@ void Game::UpdateGame()
         }
 
         /* ball & paddle2 */
-        float diff2 = mPaddle2Pos.y - i.mBallPos.y;
+        /* ball & paddle2 */
+        float diff2 = mPaddle2Pos.y - mBallPos.y;
         if (diff2 < 0.0f)
             diff2 = -diff2;
         else
@@ -249,17 +250,17 @@ void Game::UpdateGame()
             // y-diff is small enough
             diff2 <= paddleH / 2.0f &&
             // ball is at the correct x-position
-            i.mBallPos.x <= 25.0f && i.mBallPos.x >= 20.0f &&
-            // the ball is moving to the left
-            i.mBallVel.x < 0.0f
+            mBallPos.x <= (1024.0f - 10.0f - thickness) && mBallPos.x >= 1024.0f - 10.0f - thickness - 5.0f &&
+            // the ball is moving to the right
+            mBallVel.x >= 0.0f
             )
         {
-            i.mBallVel.x *= -1.0f;
+            mBallVel.x *= -1.0f;
         }
         // Did the ball go off the screen? (if so, end game)
-        else if (i.mBallPos.x <= 0.0f)
+        else if (mBallPos.x <= 0.0f || mBallPos.x >= 1024.0f)
         {
-            //mIsRunning = false;
+            mIsRunning = false;
         }
     }
 }
