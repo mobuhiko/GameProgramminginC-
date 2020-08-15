@@ -70,7 +70,7 @@ bool Game::Initialize()
     mPaddle1Pos.y = 768.0f / 2.0f;
 
     /* paddle2 */
-    mPaddle2Pos.x = 1024.0f - 10.0f;
+    mPaddle2Pos.x = 1024.0f - 10.0f - thickness;
     mPaddle2Pos.y = 768.0f / 2.0f;
 
     return true;
@@ -136,7 +136,7 @@ void Game::ProcessInput()
     {
         mBall.push_back(mBall0);
     }
-       
+
 
 }
 
@@ -196,13 +196,13 @@ void Game::UpdateGame()
     }
 
     /* ball */
-    for (auto &i : mBall)
+    for (auto& i : mBall)
     {
         i.mBallPos.x += i.mBallVel.x * deltaTime;
         i.mBallPos.y += i.mBallVel.y * deltaTime;
     }
-    
-    for (auto &i : mBall)
+
+    for (auto& i : mBall)
     {
         /* collision */
         /* ball & wall */
@@ -240,7 +240,7 @@ void Game::UpdateGame()
 
         /* ball & paddle2 */
         /* ball & paddle2 */
-        float diff2 = mPaddle2Pos.y - mBallPos.y;
+        float diff2 = mPaddle2Pos.y - i.mBallPos.y;
         if (diff2 < 0.0f)
             diff2 = -diff2;
         else
@@ -250,17 +250,17 @@ void Game::UpdateGame()
             // y-diff is small enough
             diff2 <= paddleH / 2.0f &&
             // ball is at the correct x-position
-            mBallPos.x <= (1024.0f - 10.0f - thickness) && mBallPos.x >= 1024.0f - 10.0f - thickness - 5.0f &&
+            i.mBallPos.x <= (1024.0f - 10.0f - thickness) && i.mBallPos.x >= 1024.0f - 10.0f - thickness - 5.0f &&
             // the ball is moving to the right
-            mBallVel.x >= 0.0f
+            i.mBallVel.x >= 0.0f
             )
         {
-            mBallVel.x *= -1.0f;
+            i.mBallVel.x *= -1.0f;
         }
         // Did the ball go off the screen? (if so, end game)
-        else if (mBallPos.x <= 0.0f || mBallPos.x >= 1024.0f)
+        else if (i.mBallPos.x <= 0.0f || i.mBallPos.x >= 1024.0f)
         {
-            mIsRunning = false;
+            //mIsRunning = false;
         }
     }
 }
