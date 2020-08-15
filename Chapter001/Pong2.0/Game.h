@@ -39,6 +39,6 @@ private:
 
     // ball movement
     Vector2 mBallPos;
-    Vector2 mBallvel; // velocity
+    Vector2 mBallVel; // velocity
 };
 #endif // GAME_H_INCLUDED
